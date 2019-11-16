@@ -1,24 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useReducer, useState } from 'react';
 import './App.css';
+import { todoReducer, initialState } from './reducers/reducer.js';
+import TodoForm from './components/TodoForm.js';
+import TodoList from './components/TodoList.js';
 
 function App() {
+
+  const [state, dispatch] = useReducer(todoReducer, initialState);
+  const [task, setTask] = useState('');
+
+  const handleChange = e => {
+    setTask(e.target.value);
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch({ type: 'ADD_TASK', payload: task })
+    setTask('')
+  }
+
+  const toggleComplete = task => {
+    console.log(task.id)
+    state.map(todo => {
+      if(todo.id === task.id) {
+        console.log(todo.id)
+        return {
+          ...todo,
+          completed: !task.completed
+        }
+      }
+      return todo
+    })
+    console.log(task)
+    dispatch({ type: 'TOGGLE_COMPLETE'})
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>TO DO List</h1>
+      <TodoForm 
+        handleChange={handleChange} 
+        handleSubmit={handleSubmit}
+        value={task}
+      />
+      <TodoList
+        todos={state}
+        toggleComplete={toggleComplete}
+      />
     </div>
   );
 }
