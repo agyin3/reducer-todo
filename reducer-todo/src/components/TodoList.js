@@ -13,7 +13,7 @@ const TodoList = () => {
                 {state.map(todo => {
                     return(
                         <Card key={todo.id} color={todo.completed ? 'pink' : 'grey'}>
-                            <Card.Content onClick={()=>toggleComplete(todo)}>
+                            <Card.Content onClick={()=>toggleComplete(todo.id)}>
                                 <Card.Header>{todo.item}</Card.Header>
                                 <Card.Meta>{todo.tag}</Card.Meta>
                             </Card.Content>

@@ -19,7 +19,7 @@ const TagModal = ({ todo }) => {
                 value={tag}
                 onChange={e =>handleTag(e.target.value)}
             />
-            <Button type='submit' onClick={() => addTag(todo)} fluid>Add</Button>
+            <Button type='submit' onClick={() => addTag(todo.id)} fluid>Add</Button>
             </Modal.Content>
         </Modal>
     )

@@ -18,13 +18,13 @@ function App() {
     setTask('')
   }
 
-  const addTag = (task) => {
-    dispatch({type: 'ADD_TAG', payload: {task, tag}})
+  const addTag = (id) => {
+    dispatch({type: 'ADD_TAG', payload: {id, tag}})
     setTag('');
   }
 
-  const toggleComplete = (task) => {
-    dispatch({ type: 'TOGGLE_COMPLETE', payload: task})
+  const toggleComplete = (id) => {
+    dispatch({ type: 'TOGGLE_COMPLETE', payload: id})
   }
 
   const clearComplete = e => {
@@ -37,10 +37,7 @@ function App() {
       <h1>TO DO List</h1>
       <TodoContext.Provider value={{state, task, tag, addTag, handleTag, toggleComplete, handleTask, handleSubmit, clearComplete}}>
         <TodoForm />
-        <TodoList
-          todos={state}
-          toggleComplete={toggleComplete}
-        />
+        <TodoList />
       </TodoContext.Provider>
     </div>
   );

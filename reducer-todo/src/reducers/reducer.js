@@ -4,8 +4,8 @@ export const todoReducer = (state, action) => {
             return [...state, {item: action.payload, completed: false, id: Date(), tag:''}]
         case 'TOGGLE_COMPLETE':
             return state.map((todo) => {
-                console.log('actionID:' + action.payload.id)
-                if(todo.id === action.payload.id) {
+                console.log('actionID:' + action.payload)
+                if(todo.id === action.payload) {
                     return{
                         ...todo,
                         completed: !todo.completed
@@ -17,7 +17,7 @@ export const todoReducer = (state, action) => {
             return state.filter(todo => todo.completed !== true)
         case 'ADD_TAG': 
             return state.map(todo => {
-                if(todo.id === action.payload.task.id) {
+                if(todo.id === action.payload.id) {
                     return{
                         ...todo,
                         tag: action.payload.tag
